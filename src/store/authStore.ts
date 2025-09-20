@@ -23,13 +23,11 @@ type AuthStore = AuthState & AuthActions;
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set, get) => ({
-      // 초기 상태
       user: null,
       isAuthenticated: false,
       isLoading: false,
       error: null,
 
-            // 액션들
             login: async (email: string, password: string) => {
               set({ isLoading: true, error: null });
 
@@ -58,11 +56,11 @@ export const useAuthStore = create<AuthStore>()(
 
               try {
                 const signupData: SignupRequest = { email, nickname, password };
-                const response = await authApi.signup(signupData);
+                await authApi.signup(signupData);
 
                 set({
-                  user: response,
-                  isAuthenticated: true,
+                  user: null,
+                  isAuthenticated: false,
                   isLoading: false,
                   error: null,
                 });
@@ -76,14 +74,17 @@ export const useAuthStore = create<AuthStore>()(
               }
             },
 
-            logout: () => {
-              set({
-                user: null,
-                isAuthenticated: false,
-                isLoading: false,
-                error: null,
-              });
-            },
+      logout: () => {
+        set({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+          error: null,
+        });
+        if (typeof window !== 'undefined') {
+          window.location.href = '/auth/login';
+        }
+      },
 
       clearError: () => {
         set({ error: null });
@@ -94,11 +95,11 @@ export const useAuthStore = create<AuthStore>()(
       },
     }),
     {
-      name: 'auth-storage', // localStorage 키
+      name: 'auth-storage',
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
-      }), // user와 isAuthenticated만 persist
+      }),
     }
   )
 );

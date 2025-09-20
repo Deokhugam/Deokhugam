@@ -16,7 +16,13 @@ export default function ClientLayout({
   return (
     <>
       {!hideNavigation && <NavBar />}
-      <div className={clsx(!hideNavigation && "mt-[67px]")}>{children}</div>
+      <div
+        className={clsx(
+          !hideNavigation && "mt-[67px] px-[4px] max-w-[1200px] mx-auto"
+        )}
+      >
+        {children}
+      </div>
     </>
   );
 }

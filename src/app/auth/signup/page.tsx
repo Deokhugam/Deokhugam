@@ -8,12 +8,14 @@ import { useAuthStore } from '@/store/authStore';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SignUpPage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   
   const { signup, isLoading, error, clearError } = useAuthStore();
+  const router = useRouter();
   
   const {
     register,
@@ -41,6 +43,7 @@ export default function SignUpPage() {
   const onSubmit = async (data: SignupFormData) => {
     try {
       await signup(data.email, data.nickname, data.password);
+      router.push('/auth/login');
     } catch (error) {
       console.error('회원가입 실패:', error);
     }
@@ -139,7 +142,6 @@ export default function SignUpPage() {
                    />
                  </div>
 
-                 {/* 가입하기 버튼 */}
                  <Button
                    type="submit"
                    variant="primary"
@@ -157,7 +159,6 @@ export default function SignUpPage() {
       </div>
     )}
 
-        {/* 로그인 링크 */}
         <div className="flex items-center justify-center gap-1">
           <span className="text-body3 font-medium text-gray-500">
             계정이 있으신가요?

@@ -1,11 +1,29 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useAuthGuard } from '@/hooks/auth/useAuthRedirect';
+import LoadingScreen from '@/components/common/LoadingScreen';
+
 interface ReviewDetailPageProps {
   params: Promise<{
     id: string;
   }>;
 }
 
-export default async function ReviewDetailPage({ params }: ReviewDetailPageProps) {
-  const { id } = await params;
+export default function ReviewDetailPage({ params }: ReviewDetailPageProps) {
+  const [id, setId] = useState<string>('');
+  const { shouldShowContent } = useAuthGuard();
+
+  useEffect(() => {
+    // params에서 id 추출
+    params.then(({ id: reviewId }) => {
+      setId(reviewId);
+    });
+  }, [params]);
+
+  if (!shouldShowContent) {
+    return <LoadingScreen />;
+  }
   
   return (
     <div className="min-h-screen bg-gray-0 p-8">

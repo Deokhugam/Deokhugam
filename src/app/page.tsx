@@ -1,10 +1,19 @@
-import PopularBooks from '@/components/sections/PopularBooks';
+"use client";
+
+import { useAuthGuard } from "@/hooks/auth/useAuthRedirect";
+import LoadingScreen from "@/components/common/LoadingScreen";
+import PopularBooks from "@/components/sections/PopularBooks";
 
 export default function Home() {
+  const { shouldShowContent } = useAuthGuard();
+
+  if (!shouldShowContent) {
+    return <LoadingScreen />;
+  }
   return (
     <div className="min-h-screen bg-white">
       {/* 메인 컨테이너 */}
-      <div className="px-[10px] max-w-[1200px] mx-auto">
+      <div>
         <div className="flex gap-[32px]">
           {/* 인기도서 + 인기리뷰 섹션 */}
           <div className="flex-1">
