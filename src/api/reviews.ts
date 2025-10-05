@@ -33,12 +33,10 @@ export const getPopularReviews = async (
     queryParams.append("after", after);
   }
 
-  // 사용자 ID 추가로 likedByMe 정보 포함
   if (typeof window !== "undefined") {
     const authState = useAuthStore.getState();
     if (authState.user?.id) {
       queryParams.append("requestUserId", authState.user.id);
-      console.log("requestUserId 추가:", authState.user.id);
     } else {
       console.log("사용자 ID 없음");
     }

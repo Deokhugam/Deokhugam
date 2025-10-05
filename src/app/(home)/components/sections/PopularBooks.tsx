@@ -94,11 +94,11 @@ export default function PopularBooks() {
       />
 
       {loading ? (
-        <div className="flex justify-center py-8 w-[908px]">
+        <div className="flex justify-center py-8 ">
           <p className="text-body2 text-gray-500">로딩 중...</p>
         </div>
       ) : error ? (
-        <div className="flex justify-center py-8 w-[908px]">
+        <div className="flex justify-center py-8 ">
           <p className="text-body2 text-red-500">{error}</p>
         </div>
       ) : !hasData ? (
@@ -121,7 +121,7 @@ export default function PopularBooks() {
                   ? "w-[675px]"
                   : popularBooks.length === 2
                     ? "w-[442px]"
-                    : "",
+                    : "w-[209px]",
               "max-lg:w-full max-lg:justify-center max-lg:items-center"
             )}
           >

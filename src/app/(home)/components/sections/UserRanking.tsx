@@ -53,8 +53,6 @@ export default function UserRanking({
         limit: 10
       });
 
-      console.log("API 응답:", response);
-
       if (!response.content || response.content.length === 0) {
         setPowerUsers([]);
         setIsPartialData(false);
@@ -162,7 +160,7 @@ export default function UserRanking({
         <button
           onClick={() => setIsShowRanking(prev => !prev)}
           className={clsx(
-            "fixed bottom-[calc(100px+env(safe-area-inset-bottom))] right-4 w-[60px] h-[60px] rounded-full shadow-lg bg-gradient-to-br from-blue-300 to-red-500 text-white text-xl flex items-center justify-center transition-transform duration-200",
+            "fixed bottom-[calc(100px+env(safe-area-inset-bottom))] right-4 w-[60px] h-[60px] rounded-full shadow-lg bg-white border border-gray-300 text-gray-700 text-xl flex items-center justify-center transition-transform duration-200",
             "hover:scale-110 active:scale-90"
           )}
         >
