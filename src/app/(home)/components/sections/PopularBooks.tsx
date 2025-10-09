@@ -102,14 +102,12 @@ export default function PopularBooks() {
           <p className="text-body2 text-red-500">{error}</p>
         </div>
       ) : !hasData ? (
-        <div className="w-[908px]">
-          <EmptyState
-            title=""
-            description="등록된 인기 도서가 없습니다."
-            iconSrc="images/icon/ic_book2.svg"
-            iconAlt="도서 아이콘"
-          />
-        </div>
+        <EmptyState
+          title=""
+          description="등록된 인기 도서가 없습니다."
+          iconSrc="images/icon/ic_book2.svg"
+          iconAlt="도서 아이콘"
+        />
       ) : (
         <>
           <div
